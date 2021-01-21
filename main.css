@@ -1,0 +1,157 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+body {
+    background: url(john-anselmo-GEwC80ZG7iU-unsplash.jpg);
+    background-attachment: fixed;
+}
+
+.overlay {
+    background: black;
+    width: 100%;
+    height: 100%;
+    opacity: .6;
+    position: fixed;
+}
+
+.title {
+    display: flex;
+    width: 100%;
+    height: 15vh;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 40px;
+    color: white;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.time {
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 100px;
+    padding-bottom: 20px;
+    color: white;
+    position: relative;
+}
+
+.date {
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 50px;
+    color: white;
+    position: relative;
+}
+
+.input-section {
+    text-align: center;
+    padding: 60px;
+    position: relative;
+}
+
+.input {
+    background: black;
+    color: white;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.submit-btn {
+    position: absolute;
+    height: 26.5%;
+    width: 2%;
+    font-size: 190%;
+    outline: none;
+    border: none;
+    background: black;
+    color: seagreen;
+    transition: .5s ease;
+}
+
+.submit-btn:hover {
+    color: black;
+    background: seagreen;
+    transition: .5s ease;
+}
+
+.submit-btn::placeholder {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.jobs {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    text-align: center;
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    position: relative;
+}
+
+.jobs h3 {
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.completed {
+    text-align: center;
+}
+
+.item-div {
+   margin: 1rem;
+   background: rgba(0, 238, 91, 0.1);
+   color: white;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   text-align: left;
+   position: relative;
+}
+
+.item {
+    font-size: 23px;
+    flex: 1;
+    padding: 10px;
+}
+
+.doing-btn, 
+.complete-btn,
+.remove-btn {
+    outline: none;
+    border: none;
+    background:rgba(0, 238, 91, .1);
+    cursor: pointer;
+    font-size: 30px;
+    padding: .5rem;
+}
+
+.doing-btn {
+    color: orange;
+}
+
+.complete-btn {
+    color: black;
+    background: green;
+}
+
+.remove-btn {
+    background: red;
+    color: white;
+}
+
+.fa-arrow-circle-right {
+    pointer-events: none;
+}
+
+.fa-check-square {
+    pointer-events: none;
+}
+
+.fa-trash-alt {
+    pointer-events: none;
+}
