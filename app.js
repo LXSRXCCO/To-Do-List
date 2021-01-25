@@ -1,35 +1,17 @@
 const title = document.querySelector(".title");
 const showDate = document.querySelector(".date");
-const showTime = document.querySelector(".time");
 const input = document.querySelector(".input");
 const submitBtn = document.querySelector(".submit-btn");
 const todoList  = document.querySelector(".todo-list");
 const doing = document.querySelector(".doing");
 const completed = document.querySelector(".completed");
 
-setInterval(showTheTime, 1000);
 window.addEventListener("load", showTheDate);
+window.addEventListener("load", onLoad);
 todoList.addEventListener("click", moveItem);
 doing.addEventListener("click", moveToCompleted);
 completed.addEventListener("click", deleteItem);
 submitBtn.addEventListener("click", addItem);
-
-function showTheTime(){
-    let time = new Date();
-    let hours = time.getHours();
-    let minutes = time.getMinutes();
-    let seconds = time.getSeconds();
-
-    if(hours < 10){
-        hours = "0" + hours;
-    } else if(minutes < 10){
-        minutes = "0" + minutes;
-    } else if(seconds < 10) {
-        seconds = "0" + seconds;
-    }
-
-    showTime.innerText = hours + ":" + minutes + ":" + seconds;
-}
 
 function showTheDate(){
     let date = new Date();
@@ -66,6 +48,80 @@ function showTheDate(){
     showDate.textContent = days[day] + " " + dateOfMonth + " " + months[month] + " " + year;
 }
 
+function onLoad(){
+    let todos;
+    if(localStorage.getItem("todos") === null){
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem("todos"));
+    }
+
+    let doings;
+    if(localStorage.getItem("doings") === null){
+        doings = [];
+    } else {
+        doings = JSON.parse(localStorage.getItem("doings"));
+    }
+
+    let done;
+    if(localStorage.getItem("done") === null){
+        done = [];
+    } else {
+        done = JSON.parse(localStorage.getItem("done"));
+    }
+
+    todos.forEach((todo) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("item-div");
+    
+        const item = document.createElement("p");
+        item.innerText = todo;
+        item.classList.add("item");
+    
+        const doingBtn = document.createElement("button");
+        doingBtn.innerHTML = `<i class="fas fa-arrow-circle-right"></i>`
+        doingBtn.classList.add("doing-btn");
+    
+        itemDiv.appendChild(item);
+        itemDiv.appendChild(doingBtn);
+        todoList.appendChild(itemDiv);
+    })
+
+    doings.forEach((todo) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("item-div");
+    
+        const item = document.createElement("p");
+        item.innerText = todo;
+        item.classList.add("item");
+    
+        const doingBtn = document.createElement("button");
+        doingBtn.innerHTML = `<i class="fas fa-check-square"></i>`
+        doingBtn.classList.add("complete-btn");
+    
+        itemDiv.appendChild(item);
+        itemDiv.appendChild(doingBtn);
+        doing.appendChild(itemDiv);
+    })
+
+    done.forEach((todo) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("item-div");
+    
+        const item = document.createElement("p");
+        item.innerText = todo;
+        item.classList.add("item");
+    
+        const doingBtn = document.createElement("button");
+        doingBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`
+        doingBtn.classList.add("remove-btn");
+    
+        itemDiv.appendChild(item);
+        itemDiv.appendChild(doingBtn);
+        completed.appendChild(itemDiv);
+    })
+}
+
 function addItem(){
     const itemDiv = document.createElement("div");
     itemDiv.classList.add("item-div");
@@ -94,16 +150,18 @@ function addTodoLocalStorage(item){
         todos = JSON.parse(localStorage.getItem("todos"));
     }
 
-    todos.push(item);
-    localStorage.setItem("todos", JSON.stringify(todos));
-}
-
-function addTodoLocalStorage(item){
-    let todos;
-    if(localStorage.getItem("todos") === null){
-        todos = [];
+    let doings;
+    if(localStorage.getItem("doings") === null){
+        doings = [];
     } else {
-        todos = JSON.parse(localStorage.getItem("todos"));
+        doings = JSON.parse(localStorage.getItem("doings"));
+    }
+
+    let done;
+    if(localStorage.getItem("done") === null){
+        done = [];
+    } else {
+        done = JSON.parse(localStorage.getItem("done"));
     }
 
     todos.push(item);
@@ -121,7 +179,37 @@ function moveItem(e){
         complete.innerHTML = `<i class="fas fa-check-square"></i>`;
         parent.appendChild(complete);
         item.remove();
+        addDoingLocalStorage(doing);
     }
+}
+
+function addDoingLocalStorage(item){
+    let todos;
+    if(localStorage.getItem("todos") === null){
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem("todos"));
+    }
+
+    let doings;
+    if(localStorage.getItem("doings") === null){
+        doings = [];
+    } else {
+        doings = JSON.parse(localStorage.getItem("doings"));
+    }
+
+    let done;
+    if(localStorage.getItem("done") === null){
+        done = [];
+    } else {
+        done = JSON.parse(localStorage.getItem("done"));
+    }
+
+    const index = (item.children[1].innerText);
+    todos.splice(todos.indexOf(index), 1);
+    doings.push(index);
+    localStorage.setItem("todos", JSON.stringify(todos));
+    localStorage.setItem("doings", JSON.stringify(doings));
 }
 
 function moveToCompleted(e){
@@ -135,13 +223,71 @@ function moveToCompleted(e){
         remove.innerHTML = `<i class="fas fa-trash-alt"></i>`;
         elementParent.appendChild(remove);
         element.remove();
+        addCompletedLocalStorage(completed)
     }
 }
 
-function deleteItem(e){
+function addCompletedLocalStorage(item){
+    let todos;
+    if(localStorage.getItem("todos") === null){
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem("todos"));
+    }
+
+    let doings;
+    if(localStorage.getItem("doings") === null){
+        doings = [];
+    } else {
+        doings = JSON.parse(localStorage.getItem("doings"));
+    }
+
+    let done;
+    if(localStorage.getItem("done") === null){
+        done = [];
+    } else {
+        done = JSON.parse(localStorage.getItem("done"));
+    }
+
+    const index = (item.children[1].innerText);
+    doings.splice(doings.indexOf(index), 1);
+    done.push(index);
+    localStorage.setItem("doings", JSON.stringify(doings));
+    localStorage.setItem("done", JSON.stringify(done));
+}
+
+function deleteItem(e, item){
     const removeBtn = e.target;
     if(removeBtn.classList[0] === "remove-btn"){
         const removeParent = removeBtn.parentElement;
         removeParent.remove();
+        removeCompleteLocalStorage(removeParent);
     }
+}
+
+function removeCompleteLocalStorage(item){
+    let todos;
+    if(localStorage.getItem("todos") === null){
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem("todos"));
+    }
+
+    let doings;
+    if(localStorage.getItem("doings") === null){
+        doings = [];
+    } else {
+        doings = JSON.parse(localStorage.getItem("doings"));
+    }
+
+    let done;
+    if(localStorage.getItem("done") === null){
+        done = [];
+    } else {
+        done = JSON.parse(localStorage.getItem("done"));
+    }
+
+    const index = item.innerText;
+    done.splice(done.indexOf(index), 1);
+    localStorage.setItem("done", JSON.stringify(done));
 }
