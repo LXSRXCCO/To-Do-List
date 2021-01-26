@@ -123,23 +123,28 @@ function onLoad(){
 }
 
 function addItem(){
-    const itemDiv = document.createElement("div");
-    itemDiv.classList.add("item-div");
+    if(input.value == ""){
+        alert("Please Add some text!");
+        return false;
+    } else {
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("item-div");
 
-    const item = document.createElement("p");
-    item.innerText = input.value;
-    item.classList.add("item");
+        const item = document.createElement("p");
+        item.innerText = input.value;
+        item.classList.add("item");
 
-    const doingBtn = document.createElement("button");
-    doingBtn.innerHTML = `<i class="fas fa-arrow-circle-right"></i>`
-    doingBtn.classList.add("doing-btn");
+        const doingBtn = document.createElement("button");
+        doingBtn.innerHTML = `<i class="fas fa-arrow-circle-right"></i>`
+        doingBtn.classList.add("doing-btn");
 
-    itemDiv.appendChild(item);
-    itemDiv.appendChild(doingBtn);
+        itemDiv.appendChild(item);
+        itemDiv.appendChild(doingBtn);
 
-    todoList.appendChild(itemDiv);
-    addTodoLocalStorage(input.value);
-    input.value = "";
+        todoList.appendChild(itemDiv);
+        addTodoLocalStorage(input.value);
+        input.value = "";
+    }
 }
 
 function addTodoLocalStorage(item){
