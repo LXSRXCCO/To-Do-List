@@ -7,6 +7,7 @@
 body {
     background: url(john-anselmo-GEwC80ZG7iU-unsplash.jpg);
     background-attachment: fixed;
+    width: 100%;
 }
 
 .overlay {
@@ -66,7 +67,7 @@ body {
     position: absolute;
     height: 26.5%;
     width: 2%;
-    font-size: 10%%;
+    font-size: 10%;
     outline: none;
     border: none;
     background: black;
@@ -154,4 +155,82 @@ body {
 
 .fa-trash-alt {
     pointer-events: none;
+}
+
+@media only screen and (max-width: 375px){    
+    body {
+        width: 100%;
+        background-size: cover;
+        overflow-x: hidden;
+    }
+
+    .overlay {
+        position: fixed;
+    }
+
+    .title {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .date {
+        font-size: 18px;
+    }
+
+    .input-section {
+        padding: 20px;
+    }
+
+    .input {
+        width: 70%;
+    }
+
+    .submit-btn {
+        width: 6%;
+        height: 51.5%;
+        font-size: 15px;
+    }
+
+    .jobs {
+        display: block;
+    }
+
+    .jobs div {
+        margin-bottom: 20%;
+    }
+
+    .jobs h3 {
+        font-size: 18px;
+    }
+
+    .item-div {
+        margin-left: 4rem;
+        background: rgba(0, 238, 91, 0.1);
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+        position: relative;
+     }
+
+    .item {
+        font-size: 15px;
+    }
+
+    .doing-btn, 
+    .complete-btn,
+    .remove-btn {
+        outline: none;
+        border: none;
+        background:rgba(0, 238, 91, .1);
+        cursor: pointer;
+        font-size: 15px;
+        padding: .5rem;
+    }
+
+    .remove-btn {
+        background: red;
+        color: white;
+    }
 }
