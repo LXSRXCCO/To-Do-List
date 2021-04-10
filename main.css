@@ -205,13 +205,6 @@ body {
 
     .item-div {
         margin-left: 4rem;
-        background: rgba(0, 238, 91, 0.1);
-        color: white;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        text-align: left;
-        position: relative;
      }
 
     .item {
@@ -232,5 +225,22 @@ body {
     .remove-btn {
         background: red;
         color: white;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .jobs {
+        display: block;
+        width: 80%;
+        margin: auto;
+    }
+
+    .jobs div {
+        margin-bottom: 20%;
+    }
+
+    .submit-btn {
+        width: 5%;
+        font-size: 20px;
     }
 }
